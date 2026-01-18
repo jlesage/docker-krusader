@@ -1,0 +1,60 @@
+First Time=false
+Version=2.9.0
+
+[Archives]
+Supported Packers=tar,gzip,bzip2,lzma,xz,unzip,zip,cbz,lha,cpio,unarj,dpkg,7z,rpm
+
+[Dependencies]
+7z=/usr/bin/7z
+bzip2=/usr/bin/bzip2
+checksum utility=/usr/bin/md5sum
+cpio=/usr/bin/cpio
+diff utility=/usr/bin/kdiff3
+dpkg=/usr/bin/dpkg
+gzip=/bin/gzip
+kdiff3=/usr/bin/kdiff3
+kget=/usr/bin/kget
+krename=/usr/bin/krename
+lha=/usr/bin/lha
+locate=/usr/bin/locate
+lzma=/usr/bin/lzma
+md5sum=/usr/bin/md5sum
+mount=/bin/mount
+rpm=/usr/bin/rpm
+rpm2cpio=/usr/bin/rpm2cpio
+sha1sum=/usr/bin/sha1sum
+sha224sum=/usr/bin/sha224sum
+sha256sum=/usr/bin/sha256sum
+sha384sum=/usr/bin/sha384sum
+sha512sum=/usr/bin/sha512sum
+tar=/bin/tar
+umount=/bin/umount
+unarj=/usr/bin/unarj
+unzip=/usr/bin/unzip
+updatedb=/usr/bin/updatedb
+xz=/usr/bin/xz
+zip=/usr/bin/zip
+
+[General]
+Move To Trash=false
+
+[Locate]
+UpdateDB Arguments=--output=/config/.locate.db
+
+[Look&Feel]
+Single Instance Mode=true
+
+[Startup][Left Tab Bar][Tabs][Tab0]
+PinnedUrl=
+Properties=0
+Type=0
+Url=file:///storage
+
+[Startup][Right Tab Bar][Tabs][Tab0]
+PinnedUrl=
+Properties=0
+Type=0
+Url=file:///storage
+
+[ViewerModule]
+FirstRun=false

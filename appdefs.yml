@@ -1,0 +1,46 @@
+---
+
+#
+# Definitions for Krusader docker container.
+#
+# This file is used as data source to generate README.md and unRAID template files
+# from Jinja2 templates.
+#
+
+app:
+  id: 36
+  name: krusader
+  friendly_name: Krusader
+  gui_type: x11
+  base_os: alpine
+  project:
+    description: |-
+      Krusader is an advanced, twin-panel (commander-style) file manager for
+      Unix-like systems. It offers powerful file management features including archive
+      handling, access to local and remote filesystems, advanced search, directory
+      synchronization, file comparison, and batch renaming.
+    url: https://krusader.org
+  unraid:
+    #support_url: https://forums.unraid.net/topic/XXXXX-support-krusader/
+    category: "Productivity: Tools:"
+  documentation:
+  changelog:
+    - version: 26.01.1
+      date: 2026-01-24
+      changes:
+        - 'Initial release.'
+
+container:
+  storage_permissions: rw
+
+  # Environment variables.
+  environment_variables: []
+
+  # Volumes
+  volumes: []
+
+  # Network ports
+  ports: []
+
+  # Devices
+  devices: []
