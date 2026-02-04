@@ -4,14 +4,35 @@
 # https://github.com/jlesage/docker-krusader
 #
 
+# Define software versions.
+ARG KRUSADER_VERSION=2.9.0-r0
+ARG UNRAR_VERSION=7.2.3
+
+# Define software download URLs.
+ARG UNRAR_URL=https://www.rarlab.com/rar/unrarsrc-${UNRAR_VERSION}.tar.gz
+
+# Get Dockerfile cross-compilation helpers.
+FROM --platform=$BUILDPLATFORM tonistiigi/xx AS xx
+
+# Build unrar. It has been moved to non-free since Alpine 3.15.
+# https://wiki.alpinelinux.org/wiki/Release_Notes_for_Alpine_3.15.0#unrar_moved_to_non-free
+FROM --platform=$BUILDPLATFORM alpine:3.23 AS unrar
+ARG TARGETPLATFORM
+ARG UNRAR_URL
+COPY --from=xx / /
+COPY src/unrar /build
+RUN /build/build.sh "$UNRAR_URL"
+RUN xx-verify \
+    /tmp/unrar-install/usr/bin/unrar
+
 # Pull base image.
 FROM jlesage/baseimage-gui:alpine-3.23-v4.10.6
 
+ARG KRUSADER_VERSION
+ARG DOCKER_IMAGE_VERSION
+
 # Docker image version is provided via build arg.
 ARG DOCKER_IMAGE_VERSION=
-
-# Define software versions.
-ARG KRUSADER_VERSION=2.9.0-r0
 
 # Define working directory.
 WORKDIR /tmp
@@ -69,6 +90,7 @@ RUN \
 
 # Add files.
 COPY rootfs/ /
+COPY --from=unrar /tmp/unrar-install/usr/bin/unrar /usr/bin/unrar
 
 # Set internal environment variables.
 RUN \

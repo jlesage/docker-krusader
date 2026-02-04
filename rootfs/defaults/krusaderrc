@@ -30,6 +30,7 @@ sha512sum=/usr/bin/sha512sum
 tar=/bin/tar
 umount=/bin/umount
 unarj=/usr/bin/unarj
+unrar=/usr/bin/unrar
 unzip=/usr/bin/unzip
 updatedb=/usr/bin/updatedb
 xz=/usr/bin/xz

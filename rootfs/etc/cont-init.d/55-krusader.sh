@@ -9,6 +9,11 @@ mkdir -p "$XDG_CONFIG_HOME"
 # Install default config if needed.
 [ -f "$XDG_CONFIG_HOME"/krusaderrc ] || cp -v /defaults/krusaderrc "$XDG_CONFIG_HOME"/
 
+# Upgrade the config file if needed.
+if ! grep -q "^unrar=" "$XDG_CONFIG_HOME"/krusaderrc; then
+    sed -i '/^unarj=/a unrar=\/usr\/bin\/unrar' "$XDG_CONFIG_HOME"/krusaderrc
+fi
+
 # Clear the fstab file.
 echo > /etc/fstab
 
