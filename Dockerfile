@@ -79,8 +79,14 @@ RUN \
         # A font is needed.
         font-dejavu \
         # For dark mode.
-        adwaita-qt \
+        adwaita-qt6 \
+        # Breeze icons theme.
+        breeze-icons \
         && \
+    # Platform theme integration plugin.
+    add-pkg --repository http://dl-cdn.alpinelinux.org/alpine/edge/testing qt6ct && \
+    # Disable kglobalaccel.
+    rm /usr/share/dbus-1/services/org.kde.kglobalaccel.service && \
     true
 
 # Generate and install favicons.
