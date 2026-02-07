@@ -85,7 +85,8 @@ RUN \
         && \
     # Platform theme integration plugin.
     add-pkg --repository http://dl-cdn.alpinelinux.org/alpine/edge/testing qt6ct && \
-    # Disable kglobalaccel.
+    # Disable kglobalaccel service: not needed and it has been seen consuming a
+    # fair amount of CPU.
     rm /usr/share/dbus-1/services/org.kde.kglobalaccel.service && \
     true
 
