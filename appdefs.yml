@@ -25,6 +25,11 @@ app:
     category: "Productivity: Tools:"
   documentation:
   changelog:
+    - version: 26.02.1
+      date: 2026-02-06
+      changes:
+        - 'Fixed an issue where some UI icons were missing.'
+        - 'Added unrar to the available tools.'
     - version: 26.01.1
       date: 2026-01-24
       changes:
