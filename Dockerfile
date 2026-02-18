@@ -79,7 +79,7 @@ RUN \
         # A font is needed.
         font-dejavu \
         # For dark mode.
-        adwaita-qt6 \
+        adwaita-qt \
         # Breeze icons theme.
         breeze-icons \
         && \
