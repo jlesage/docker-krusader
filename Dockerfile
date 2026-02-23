@@ -26,7 +26,7 @@ RUN xx-verify \
     /tmp/unrar-install/usr/bin/unrar
 
 # Pull base image.
-FROM jlesage/baseimage-gui:alpine-3.23-v4.11.1
+FROM jlesage/baseimage-gui:alpine-3.23-v4.11.2
 
 ARG KRUSADER_VERSION
 ARG DOCKER_IMAGE_VERSION
