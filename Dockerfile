@@ -16,7 +16,7 @@ FROM --platform=$BUILDPLATFORM tonistiigi/xx AS xx
 
 # Build unrar. It has been moved to non-free since Alpine 3.15.
 # https://wiki.alpinelinux.org/wiki/Release_Notes_for_Alpine_3.15.0#unrar_moved_to_non-free
-FROM --platform=$BUILDPLATFORM alpine:3.23 AS unrar
+FROM --platform=$BUILDPLATFORM alpine:3.24 AS unrar
 ARG TARGETPLATFORM
 ARG UNRAR_URL
 COPY --from=xx / /
@@ -26,7 +26,7 @@ RUN xx-verify \
     /tmp/unrar-install/usr/bin/unrar
 
 # Pull base image.
-FROM jlesage/baseimage-gui:alpine-3.23-v4.12.6
+FROM jlesage/baseimage-gui:alpine-3.24-v4.12.6
 
 ARG KRUSADER_VERSION
 ARG DOCKER_IMAGE_VERSION
@@ -85,9 +85,6 @@ RUN \
         && \
     # Platform theme integration plugin.
     add-pkg --repository http://dl-cdn.alpinelinux.org/alpine/edge/testing qt6ct && \
-    # Disable kglobalaccel service: not needed and it has been seen consuming a
-    # fair amount of CPU.
-    rm /usr/share/dbus-1/services/org.kde.kglobalaccel.service && \
     true
 
 # Generate and install favicons.
