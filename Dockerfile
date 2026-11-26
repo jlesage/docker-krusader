@@ -7,9 +7,11 @@
 # Define software versions.
 ARG KRUSADER_VERSION=2.9.0-r0
 ARG UNRAR_VERSION=7.2.3
+ARG QT6CT_VERSION=0.11
 
 # Define software download URLs.
 ARG UNRAR_URL=https://www.rarlab.com/rar/unrarsrc-${UNRAR_VERSION}.tar.gz
+ARG QT6CT_URL=https://www.opencode.net/trialuser/qt6ct/-/archive/${QT6CT_VERSION}/qt6ct-${QT6CT_VERSION}.tar.gz
 
 # Get Dockerfile cross-compilation helpers.
 FROM --platform=$BUILDPLATFORM tonistiigi/xx AS xx
@@ -24,6 +26,18 @@ COPY src/unrar /build
 RUN /build/build.sh "$UNRAR_URL"
 RUN xx-verify \
     /tmp/unrar-install/usr/bin/unrar
+
+# Build qt6ct.
+FROM --platform=$BUILDPLATFORM alpine:3.24 AS qt6ct
+ARG TARGETPLATFORM
+ARG QT6CT_URL
+COPY --from=xx / /
+COPY src/qt6ct /build
+RUN /build/build.sh "$QT6CT_URL"
+RUN xx-verify \
+    /tmp/qt6ct-install/usr/lib/libqt6ct-common.so \
+    /tmp/qt6ct-install/usr/lib/qt6/plugins/platformthemes/libqt6ct.so \
+    /tmp/qt6ct-install/usr/lib/qt6/plugins/styles/libqt6ct-style.so
 
 # Pull base image.
 FROM jlesage/baseimage-gui:alpine-3.24-v4.15.1
@@ -83,8 +97,6 @@ RUN \
         # Breeze icons theme.
         breeze-icons \
         && \
-    # Platform theme integration plugin.
-    add-pkg --repository http://dl-cdn.alpinelinux.org/alpine/edge/testing qt6ct && \
     true
 
 # Generate and install favicons.
@@ -95,6 +107,7 @@ RUN \
 # Add files.
 COPY rootfs/ /
 COPY --from=unrar /tmp/unrar-install/usr/bin/unrar /usr/bin/unrar
+COPY --from=qt6ct /tmp/qt6ct-install/ /
 
 # Set internal environment variables.
 RUN \
